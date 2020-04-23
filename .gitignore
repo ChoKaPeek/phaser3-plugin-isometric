@@ -38,4 +38,4 @@ Thumbs.db
 
 node_modules/
 docs/node_modules/
-
+.idea/

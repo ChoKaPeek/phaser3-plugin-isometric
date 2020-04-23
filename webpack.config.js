@@ -1,5 +1,5 @@
 module.exports = {
-  mode: 'development',
+  mode: 'production',
   entry: [
     './src/IsoPlugin.js'
   ],
@@ -11,8 +11,8 @@ module.exports = {
   output: {
     path: __dirname + '/dist',
     publicPath: '/',
-    filename: 'phaser-plugin-isometric.js',
-    library: 'phaser-plugin-isometric',
+    filename: 'phaser3-plugin-isometric.js',
+    library: 'phaser3-plugin-isometric',
     libraryTarget: 'commonjs2'
   }
 };
