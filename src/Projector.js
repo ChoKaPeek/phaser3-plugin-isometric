@@ -12,7 +12,7 @@ export const MILITARY = Math.PI / 4;
  * @classdesc
  * Creates a new Isometric Projector object, which has helpers for projecting x, y and z coordinates into axonometric x and y equivalents.
  */
-class Projector {
+export default class Projector {
   /**
   * @constructor
   * @param {Phaser.Scene} scene - The current scene object.
@@ -121,5 +121,3 @@ class Projector {
     return out;
   }
 }
-
-export default Projector;

@@ -31,9 +31,6 @@
 import Projector from './Projector';
 import IsoSprite from './IsoSprite';
 import IsoParticleEmitterManager from './particles/IsoParticleEmitterManager';
-export { default as IsoPhysics } from './physics/IsoPhysics';
-
-//  Type consts
 
 /**
  * @class IsometricPlugin
@@ -43,7 +40,7 @@ export { default as IsoPhysics } from './physics/IsoPhysics';
  * The goal has been to mimic as closely as possible the existing APIs provided by Phaser for standard orthogonal 2D projection, but add a third dimension.
  * Also included is an Arcade-based 3D AABB physics engine, which again is closely equivalent in functionality and its API.
  */
-export default class IsoPlugin {
+class IsoPlugin {
   /**
    * @constructor
    * @param {Phaser.Scene} scene The current scene instance
@@ -105,3 +102,16 @@ export default class IsoPlugin {
     PluginManager.register('IsoPlugin', IsoPlugin, 'isoPlugin');
   }
 }
+
+/**
+ * Export everything in the IsoPlugin scope
+ */
+IsoPlugin.Cube = require('./Cube')
+IsoPlugin.IsoSprites = require('./IsoSprite')
+IsoPlugin.Octree = require('./Octree')
+IsoPlugin.Particles = require('./particles')
+IsoPlugin.Physics = require('./physics')
+IsoPlugin.Point3 = require('./Point3')
+IsoPlugin.Projector = require('./Projector')
+
+module.exports = IsoPlugin
