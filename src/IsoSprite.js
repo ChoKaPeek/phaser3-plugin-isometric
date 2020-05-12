@@ -24,8 +24,8 @@ export default class IsoSprite extends Sprite {
    * @param {string|Phaser.RenderTexture|Phaser.BitmapData} key - This is the image or texture used by the IsoSprite during rendering. It can be a string which is a reference to the Cache entry, or an instance of a RenderTexture or PIXI.Texture.
    * @param {string|number} frame - If this IsoSprite is using part of a sprite sheet or texture atlas you can specify the exact frame to use by giving a string or numeric index.
    */
-  constructor(scene, x, y, z, texture, frame) {
-    super(scene, x, y, texture, frame);
+  constructor(scene, x, y, z, key, frame) {
+    super(scene, x, y, key, frame);
 
     /**
      * @property {number} type - The const type of this object.
