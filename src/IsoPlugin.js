@@ -90,8 +90,8 @@ export default class IsoPlugin {
       const sprite = new IsoSprite(this.scene, x, y, z, key, frame);
 
       if (typeof group === 'undefined') {
-        this.displayList.add(sprite);
-        this.updateList.add(sprite);
+        this.systems.displayList.add(sprite);
+        this.systems.updateList.add(sprite);
       } else {
         group.add(sprite, true);
       }
@@ -111,8 +111,8 @@ export default class IsoPlugin {
     Phaser.GameObjects.GameObjectFactory.register('isoParticles', function (key, frame, emitters) {
       const particles = new IsoParticleEmitterManager(this.scene, key, frame, emitters);
 
-      this.displayList.add(particles);
-      this.updateList.add(particles);
+      this.systems.displayList.add(particles);
+      this.systems.updateList.add(particles);
 
       return particles;
     });
