@@ -167,7 +167,7 @@ class Octree {
     if (this.nodes[0] != null) {
       index = this.getIndex(body);
 
-      if (index != -1) {
+      if (index !== -1) {
         this.nodes[index].insert(body);
         return;
       }
@@ -185,7 +185,7 @@ class Octree {
       while (i < this.objects.length) {
         index = this.getIndex(this.objects[i]);
 
-        if (index != -1) {
+        if (index !== -1) {
           //  this is expensive - see what we can do about it
           this.nodes[index].insert(this.objects.splice(i, 1)[0]);
         } else {
