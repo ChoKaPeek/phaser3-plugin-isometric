@@ -4,7 +4,7 @@
 
 const Particles = {
     IsoZone: require('./IsoZone'),
-    IsoParticles: require('./IsoParticleEmitterManager'),
+    IsoParticleEmitterManager: require('./IsoParticleEmitterManager'),
     IsoParticleEmitter: require('./IsoParticleEmitter')
 };
 

@@ -6,7 +6,7 @@ import Cube from './Cube';
  * @classdesc A Octree implementation based on Phaser.QuadTree.
  * Original version at https://github.com/timohausmann/quadtree-js/
  */
-class Octree {
+export default class Octree {
   /**
    * @constructor
    * @param {number} x - The bottom-back coordinate of the octree.
@@ -377,5 +377,3 @@ class Octree {
 //
 //   this.stop();
 // };
-
-export default Octree;
