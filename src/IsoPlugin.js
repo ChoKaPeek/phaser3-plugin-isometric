@@ -97,6 +97,25 @@ export default class IsoPlugin {
 
       return sprite;
     });
+
+    /**
+     * Create a new IsoParticles with specific position and sprite sheet key.
+     *
+     * @method Phaser.GameObjectFactory#isoParticles
+     * @param {number} z - Z position of the new IsoParticles.
+     * @param {string|Phaser.RenderTexture|PIXI.Texture} key - This is the image or texture used by the Sprite during rendering. It can be a string which is a reference to the Cache entry, or an instance of a RenderTexture or PIXI.Texture.
+     * @param {string|number} [frame] - If the sprite uses an image from a texture atlas or sprite sheet you can pass the frame here. Either a number for a frame ID or a string for a frame name.
+     * @param {Phaser.Types.GameObjects.Particles.ParticleEmitterConfig|Phaser.Types.GameObjects.Particles.ParticleEmitterConfig[]} [emitters] - Configuration settings for one or more emitters to create.
+     * @returns {IsoSprite} the newly created IsoSprite object.
+     */
+    Phaser.GameObjects.GameObjectFactory.register('isoParticles', function (z, key, frame, emitters) {
+      const particles = new IsoParticles(this.scene, z, key, frame, emitters);
+
+      this.displayList.add(particles);
+      this.updateList.add(particles);
+
+      return particles;
+    });
   }
 
   boot() {
