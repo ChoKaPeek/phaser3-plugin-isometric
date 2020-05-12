@@ -6,7 +6,7 @@ import Point3 from './Point3';
  * @classdesc
  * Creates a new Cube object with the bottom-back corner specified by the x, y and z parameters, with the specified breadth (widthX), depth (widthY) and height parameters. If you call this function without parameters, a Cube with x, y, z, breadth, depth and height properties set to 0 is created.
  */
-class Cube {
+export default class Cube {
   /**
    * @constructor
    * @param {number} x - The x coordinate of the bottom-back corner of the Cube.
@@ -530,5 +530,3 @@ class Cube {
     return !(a.frontX < b.x || a.frontY < b.y || a.x > b.frontX || a.y > b.frontY || a.z > b.top || a.top < b.z);
   }
 }
-
-export default Cube;
