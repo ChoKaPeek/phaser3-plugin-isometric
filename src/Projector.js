@@ -15,13 +15,13 @@ export const MILITARY = Math.PI / 4;
 class Projector {
   /**
   * @constructor
-  * @param {Phaser.Game} game - The current game object.
+  * @param {Phaser.Scene} scene - The current scene object.
   * @param {number} projectionAngle - The angle of the axonometric projection in radians. Defaults to approx. 0.4636476 (Math.atan(0.5) which is suitable for 2:1 pixel art dimetric)
   * @return {Cube} This Cube object.
   */
   constructor(scene, projectionAngle) {
     /**
-     * @property {Phaser.Scene} scne - The current scene object.
+     * @property {Phaser.Scene} scene - The current scene object.
      */
     this.scene = scene;
 
