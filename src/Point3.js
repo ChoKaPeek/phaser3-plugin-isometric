@@ -9,7 +9,7 @@
  *
  * Creates a new Point3 object. If you pass no parameters a Point3 is created set to (0, 0, 0).
  */
-class Point3 {
+export default class Point3 {
   /**
    * @constructor
    * @param {number} [x=0] - The horizontal X position of this Point.
@@ -252,5 +252,3 @@ class Point3 {
     return (a.x === b.x && a.y === b.y && a.z === b.z);
   }
 }
-
-export default Point3;
