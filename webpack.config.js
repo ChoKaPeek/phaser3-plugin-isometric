@@ -1,7 +1,7 @@
 module.exports = {
   mode: 'production',
   entry: [
-    './src/IsoPlugin.js'
+    './src/Phaser3Isometric.js'
   ],
   module: {
     rules: [
