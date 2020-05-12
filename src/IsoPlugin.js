@@ -69,8 +69,7 @@ export default class IsoPlugin {
      * @param {string|number} [frame] - If the sprite uses an image from a texture atlas or sprite sheet you can pass the frame here. Either a number for a frame ID or a string for a frame name.
      * @returns {IsoSprite} the newly created IsoSprite object.
      */
-
-    Phaser.GameObjects.GameObjectCreator.register('isoSprite', function (x, y, z, key, frame) {
+    Phaser.GameObjects.GameObjectFactory.register('isoSprite', function (x, y, z, key, frame) {
       return new IsoSprite(this.scene, x, y, z, key, frame);
     });
 
