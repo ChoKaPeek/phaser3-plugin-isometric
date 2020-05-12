@@ -10,7 +10,7 @@ import World from './World';
 export default class IsoPhysics {
   /**
    * @constructor
-   * @param {Phaser.Scene} Reference to the current scene instance.
+   * @param {Phaser.Scene} scene - Reference to the current scene instance.
    */
   constructor(scene) {
     /**
@@ -149,7 +149,6 @@ export default class IsoPhysics {
    * @param {number} theta - The angle in radians for x,y in the isometric co-ordinate system
    * @param {number} [phi=Math.PI/2] - The angle in radians for z in the isometric co-ordinate system
    * @param {number} [speed=60] - The speed it will move, in pixels per second sq.
-   * @param {Phaser.Point|object} [point] - The Point object in which the x and y properties will be set to the calculated velocity.
    * @return {Point3} - A Point where point.x contains the velocity x value and so on for y and z.
    */
   velocityFromAngles(theta, phi, speed) {
