@@ -63,37 +63,17 @@ export default class IsoPlugin {
      * @method Phaser.GameObjectFactory#isoSprite
      * @param {number} x - X position of the new IsoSprite.
      * @param {number} y - Y position of the new IsoSprite.
-     * @param {number} y - Z position of the new IsoSprite.
+     * @param {number} z - Z position of the new IsoSprite.
      * @param {string|Phaser.RenderTexture|PIXI.Texture} key - This is the image or texture used by the Sprite during rendering. It can be a string which is a reference to the Cache entry, or an instance of a RenderTexture or PIXI.Texture.
      * @param {string|number} [frame] - If the sprite uses an image from a texture atlas or sprite sheet you can pass the frame here. Either a number for a frame ID or a string for a frame name.
      * @returns {IsoSprite} the newly created IsoSprite object.
      */
 
     Phaser.GameObjects.GameObjectCreator.register('isoSprite', function (x, y, z, key, frame) {
-      return new IsoSprite(this.scene, x, y, z, key, frame);
-    });
-
-    /**
-     * Create a new IsoSprite with specific position and sprite sheet key.
-     *
-     * @method Phaser.GameObjectFactory#isoSprite
-     * @param {number} x - X position of the new IsoSprite.
-     * @param {number} y - Y position of the new IsoSprite.
-     * @param {number} y - Z position of the new IsoSprite.
-     * @param {string|Phaser.RenderTexture|PIXI.Texture} key - This is the image or texture used by the Sprite during rendering. It can be a string which is a reference to the Cache entry, or an instance of a RenderTexture or PIXI.Texture.
-     * @param {string|number} [frame] - If the sprite uses an image from a texture atlas or sprite sheet you can pass the frame here. Either a number for a frame ID or a string for a frame name.
-     * @param {Phaser.Group} [group] - Optional Group to add the object to. If not specified it will be added to the World group.
-     * @returns {IsoSprite} the newly created IsoSprite object.
-     */
-    Phaser.GameObjects.GameObjectFactory.register('isoSprite', function (x, y, z, key, group, frame = 0) {
       const sprite = new IsoSprite(this.scene, x, y, z, key, frame);
 
-      if (typeof group === 'undefined') {
-        this.systems.displayList.add(sprite);
-        this.systems.updateList.add(sprite);
-      } else {
-        group.add(sprite, true);
-      }
+      this.systems.displayList.add(sprite);
+      this.systems.updateList.add(sprite);
 
       return sprite;
     });
