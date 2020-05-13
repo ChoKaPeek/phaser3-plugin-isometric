@@ -31,7 +31,6 @@
 import Projector from './Projector';
 import IsoSprite from './IsoSprite';
 import IsoParticles from './IsoParticles';
-export { default as IsoPhysics } from './physics/IsoPhysics';
 
 //  Type consts
 
