@@ -1,6 +1,6 @@
 import IsoParticleEmitter from "./IsoParticleEmitter";
 
-export const IsoParticleEmitterManager = 'IsoParticleEmitterManager';
+export const ISOPARTICLEEMITTERMANAGER = 'IsoParticleEmitterManager';
 
 const ParticleEmitterManager = Phaser.GameObjects.Particles.ParticleEmitterManager;
 const GetFastValue = Phaser.Utils.Objects.GetFastValue;
@@ -27,7 +27,7 @@ export default class IsoParticleEmitterManager extends ParticleEmitterManager {
          * @property {string} type - The const type of this object.
          * @readonly
          */
-        this.type = IsoParticleEmitterManager;
+        this.type = ISOPARTICLEEMITTERMANAGER;
 
         // Now that the ParticleEmitterManager is created, add the emitters using our custom method
         for (let i = 0; i < emitters.length; ++i) {
