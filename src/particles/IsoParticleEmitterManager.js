@@ -22,21 +22,13 @@ export default class IsoParticleEmitterManager extends ParticleEmitterManager {
      * @param {Phaser.Types.GameObjects.Particles.ParticleEmitterConfig|Phaser.Types.GameObjects.Particles.ParticleEmitterConfig[]} [emitters] - Configuration settings for one or more emitters to create.
      */
     constructor(scene, texture, frame, emitters) {
-        super(scene, texture, frame, []);
+        super(scene, texture, frame, emitters);
 
         /**
          * @property {string} type - The const type of this object.
          * @readonly
          */
         this.type = ISOPARTICLEEMITTERMANAGER;
-
-        // Now that the ParticleEmitterManager is created, add the emitters using our custom method
-        for (let i = 0; i < emitters.length; ++i) {
-            console.log("adding emitter")
-            console.log(emitters[i])
-            const what = this.createEmitter(emitters[i])
-            console.log(what)
-        }
     }
 
     /**
