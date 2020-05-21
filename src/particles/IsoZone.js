@@ -47,4 +47,46 @@ export default class IsoZone extends EdgeZone {
         point.y = y
         point.depth = (isoPosition.x + isoPosition.y) + (isoPosition.z * 1.25);
     }
+
+    /**
+     * Get the next point in the Zone and set its coordinates on the given Particle.
+     *
+     * @method Phaser.GameObjects.Particles.Zones.EdgeZone#getPoint
+     * @since 3.0.0
+     *
+     * @param {Phaser.GameObjects.Particles.Particle} particle - The Particle.
+     */
+    getPoint(particle) {
+        if (this._direction === 0) {
+            this.counter++;
+
+            if (this.counter >= this._length) {
+                if (this.yoyo) {
+                    this._direction = 1;
+                    this.counter = this._length - 1;
+                } else {
+                    this.counter = 0;
+                }
+            }
+        } else {
+            this.counter--;
+
+            if (this.counter === -1) {
+                if (this.yoyo) {
+                    this._direction = 0;
+                    this.counter = 0;
+                } else {
+                    this.counter = this._length - 1;
+                }
+            }
+        }
+
+        const point = this.points[this.counter];
+
+        if (point) {
+            particle.x = point.x;
+            particle.y = point.y;
+            particle.depth = point.depth;
+        }
+    }
 }

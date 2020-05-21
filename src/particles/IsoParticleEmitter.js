@@ -62,8 +62,22 @@ export default class IsoParticleEmitter extends ParticleEmitter {
         const yoyo = GetFastValue(emitZone, 'yoyo', false);
         const seamless = GetFastValue(emitZone, 'seamless', true);
 
+        this.z = z
+
         // this.manager.scene is defined in Phaser's implementation
         this.emitZone = new IsoZone(z, this.manager.scene, source, quantity, stepRate, yoyo, seamless);
+    }
+
+    /**
+     * For sorting particles by depth.
+     *
+     * @param {object} a - The first particle.
+     * @param {object} b - The second particle.
+     *
+     * @return {number} The difference of a and b's depth coordinates.
+     */
+    depthSortCallback(a, b) {
+        return a.depth - b.depth
     }
 
     /**
