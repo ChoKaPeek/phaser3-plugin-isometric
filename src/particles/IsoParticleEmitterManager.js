@@ -32,7 +32,10 @@ export default class IsoParticleEmitterManager extends ParticleEmitterManager {
 
         // Now that the ParticleEmitterManager is created, add the emitters using our custom method
         for (let i = 0; i < emitters.length; ++i) {
-            this.createEmitter(emitters[i])
+            console.log("adding emitter")
+            console.log(emitters[i])
+            const what = this.createEmitter(emitters[i])
+            console.log(what)
         }
     }
 
@@ -47,13 +50,17 @@ export default class IsoParticleEmitterManager extends ParticleEmitterManager {
      * @return {Phaser.GameObjects.Particles.ParticleEmitter} The Particle Emitter that was created.
      */
     createEmitter(config) {
+        console.log("using custom creation")
         if (HasValue(config, 'emitZone')) {
             const type = GetFastValue(config.emitZone, 'type', 'random');
+            console.log(type)
             if (type === 'iso') {
+                console.log("bouyah")
                 return this.addEmitter(new IsoParticleEmitter(this, config));
             }
         }
         console.error("Iso: No emitZone of type 'iso' found, using Phaser emitter")
+        console.log("no config matching iso")
         return ParticleEmitterManager.prototype.createEmitter.call(this, config)
     }
 
