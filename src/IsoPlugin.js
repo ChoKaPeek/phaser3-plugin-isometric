@@ -85,6 +85,9 @@ class IsoPlugin {
      * @returns {IsoParticleEmitterManager} the newly created IsoParticleEmitterManager object.
      */
     Phaser.GameObjects.GameObjectFactory.register('isoParticles', function (key, frame, emitters) {
+      console.log("Key : " + key)
+      console.log("frame : " + frame)
+      console.log("emitters : " + emitters)
       const particles = new IsoParticleEmitterManager(this.scene, key, frame, emitters);
 
       this.systems.displayList.add(particles);
