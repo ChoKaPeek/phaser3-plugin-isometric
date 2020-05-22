@@ -79,13 +79,14 @@ class IsoPlugin {
      * Create a new IsoParticleEmitterManager with specific position and sprite sheet key.
      *
      * @method Phaser.GameObjectFactory#isoParticleEmitterManager
+     * @param {Point3|number} isoPosition - Necessary to compute the depth of the GameObject. If a number is given instead, it is the depth.
      * @param {string|Phaser.RenderTexture|PIXI.Texture} key - This is the image or texture used by the Manager during rendering. It can be a string which is a reference to the Cache entry, or an instance of a RenderTexture or PIXI.Texture.
      * @param {string|number} [frame] - If the Manager uses an image from a texture atlas or sprite sheet you can pass the frame here. Either a number for a frame ID or a string for a frame name.
      * @param {Phaser.Types.GameObjects.Particles.ParticleEmitterConfig|Phaser.Types.GameObjects.Particles.ParticleEmitterConfig[]} [emitters] - Configuration settings for one or more emitters to create.
      * @returns {IsoParticleEmitterManager} the newly created IsoParticleEmitterManager object.
      */
-    Phaser.GameObjects.GameObjectFactory.register('isoParticles', function (key, frame, emitters) {
-      const particles = new IsoParticleEmitterManager(this.scene, key, frame, emitters);
+    Phaser.GameObjects.GameObjectFactory.register('isoParticles', function (isoPosition, key, frame, emitters) {
+      const particles = new IsoParticleEmitterManager(this.scene, isoPosition, key, frame, emitters);
 
       this.systems.displayList.add(particles);
       this.systems.updateList.add(particles);

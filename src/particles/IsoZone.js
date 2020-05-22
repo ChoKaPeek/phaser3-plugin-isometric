@@ -45,7 +45,7 @@ export default class IsoZone extends EdgeZone {
 
         point.x = x
         point.y = y
-        point.depth = (isoPosition.x + isoPosition.y) + (isoPosition.z * 1.25);
+        point.depth = isoPosition.x + isoPosition.y + (isoPosition.z * 1.25);
     }
 
     /**

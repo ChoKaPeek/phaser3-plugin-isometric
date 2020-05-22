@@ -17,11 +17,12 @@ export default class IsoParticleEmitterManager extends ParticleEmitterManager {
      * @constructor
      * @extends Phaser.GameObjects.Particles.ParticleEmitterManager
      * @param {Phaser.Scene} scene - A reference to the current scene.
+     * @param {Point3|number} isoPosition - Necessary to compute the depth of the GameObject. If a number is given instead, it is the depth.
      * @param {string} texture - The key of the Texture this Emitter Manager will use to render particles, as stored in the Texture Manager.
      * @param {(string|integer)} [frame] - An optional frame from the Texture this Emitter Manager will use to render particles.
      * @param {Phaser.Types.GameObjects.Particles.ParticleEmitterConfig|Phaser.Types.GameObjects.Particles.ParticleEmitterConfig[]} [emitters] - Configuration settings for one or more emitters to create.
      */
-    constructor(scene, texture, frame, emitters) {
+    constructor(scene, isoPosition, texture, frame, emitters) {
         super(scene, texture, frame, emitters);
 
         /**
@@ -29,6 +30,12 @@ export default class IsoParticleEmitterManager extends ParticleEmitterManager {
          * @readonly
          */
         this.type = ISOPARTICLEEMITTERMANAGER;
+
+        if (typeof isoPosition === 'number') {
+            this.depth = isoPosition
+        } else {
+            this.depth = isoPosition.x + isoPosition.y + isoPosition.z * 1.25
+        }
     }
 
     /**
