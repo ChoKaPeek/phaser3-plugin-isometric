@@ -39,7 +39,6 @@ export default class IsoZone extends EdgeZone {
      * @private
      */
     _project(point) {
-        console.log("old "+ point.x)
         const isoPosition = new Point3(point.x, point.y, this.z)
         const pluginKey = this.scene.sys.settings.map.isoPlugin;
         const sceneProjector = this.scene[pluginKey].projector;
@@ -47,8 +46,7 @@ export default class IsoZone extends EdgeZone {
 
         point.x = x
         point.y = y
-        point.depth = (isoPosition.x + isoPosition.y) + (isoPosition.z * 1.25);
-        console.log("new "+ point.x)
+        point.depth = isoPosition.x + isoPosition.y + (isoPosition.z * 1.25);
     }
 
     /**
