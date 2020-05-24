@@ -36,6 +36,9 @@ export default class IsoParticleEmitter extends ParticleEmitter {
          */
         this.type = ISOPARTICLEEMITTER;
 
+        // Do we need to dynamically update the depth of the associated manager?
+        this.dynamicDepth = GetFastValue(config, 'dynamicDepth', false);
+
         // Add an IsoZone
         this._setIsoEmitZone(emitZone)
     }
@@ -62,8 +65,18 @@ export default class IsoParticleEmitter extends ParticleEmitter {
         const yoyo = GetFastValue(emitZone, 'yoyo', false);
         const seamless = GetFastValue(emitZone, 'seamless', true);
 
-        // this.manager.scene is defined in Phaser's implementation
-        this.emitZone = new IsoZone(z, this.manager.scene, source, quantity, stepRate, yoyo, seamless);
+        // this.manager.scene is defined in Phaser's manager implementation
+        this.emitZone = new IsoZone(this.manager.scene, z, source, quantity, stepRate, yoyo, seamless);
+    }
+
+    _meanParticlesDepth() {
+        let mean = 0
+        for (let i = 0; i < this.alive.length; ++i) {
+            mean += this.alive[i].depth
+        }
+        mean /= this.alive.length
+
+        return mean
     }
 
     /**
@@ -86,5 +99,10 @@ export default class IsoParticleEmitter extends ParticleEmitter {
      */
     preUpdate(time, delta) {
         ParticleEmitter.prototype.preUpdate.call(this, time, delta);
+
+        // Update manager's depth dynamically if wanted
+        if (this.dynamicDepth) {
+            this.manager.depth = this._meanParticlesDepth()
+        }
     }
 }
