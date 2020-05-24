@@ -1,7 +1,6 @@
 export const ISOPARTICLE = 'IsoParticle';
 
 const Particle = Phaser.GameObjects.Particles.Particle;
-const Depth = Phaser.GameObjects.Components.Depth;
 
 /**
  * @class IsoParticle

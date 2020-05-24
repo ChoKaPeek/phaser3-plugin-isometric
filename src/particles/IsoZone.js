@@ -12,20 +12,20 @@ export default class IsoZone extends EdgeZone {
     /**
      * @constructor
      * @extends Phaser.GameObjects.Particles.Zones.EdgeZone
-     * @param {number} z - isometric z value.
      * @param {Phaser.Scene} scene - A reference to the current scene.
+     * @param {number} z - isometric z value.
      * @param {Phaser.Types.GameObjects.Particles.EdgeZoneSource} source - An object instance with a `getPoints(quantity, stepRate)` method returning an array of points.
      * @param {integer} quantity - The number of particles to place on the source edge. Set to 0 to use `stepRate` instead.
      * @param {number} stepRate - The distance between each particle. When set, `quantity` is implied and should be set to 0.
      * @param {boolean} [yoyo=false] - Whether particles are placed from start to end and then end to start.
      * @param {boolean} [seamless=true] - Whether one endpoint will be removed if it's identical to the other.
      */
-    constructor(z, scene, source, quantity, stepRate, yoyo, seamless) {
+    constructor(scene, z, source, quantity, stepRate, yoyo, seamless) {
         super(source, quantity, stepRate, yoyo, seamless);
         console.log("change all points")
 
-        this.z = z
         this.scene = scene
+        this.z = z
 
         for (let i = 0; i < this.points.length; ++i)
             this._project(this.points[i])
