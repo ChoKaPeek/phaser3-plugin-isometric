@@ -12,7 +12,7 @@ export default class IsoZone extends EdgeZone {
     /**
      * @constructor
      * @extends Phaser.GameObjects.Particles.Zones.EdgeZone
-     * @param {IsoParticleEmitter} emitter - A reference to the particle emitter.
+     * @param {Phaser.Scene} scene - A reference to the current scene.
      * @param {number} z - isometric z value.
      * @param {Phaser.Types.GameObjects.Particles.EdgeZoneSource} source - An object instance with a `getPoints(quantity, stepRate)` method returning an array of points.
      * @param {integer} quantity - The number of particles to place on the source edge. Set to 0 to use `stepRate` instead.
@@ -20,11 +20,11 @@ export default class IsoZone extends EdgeZone {
      * @param {boolean} [yoyo=false] - Whether particles are placed from start to end and then end to start.
      * @param {boolean} [seamless=true] - Whether one endpoint will be removed if it's identical to the other.
      */
-    constructor(emitter, z, source, quantity, stepRate, yoyo, seamless) {
+    constructor(scene, z, source, quantity, stepRate, yoyo, seamless) {
         super(source, quantity, stepRate, yoyo, seamless);
         console.log("change all points")
 
-        this.emitter = emitter
+        this.scene = scene
         this.z = z
 
         for (let i = 0; i < this.points.length; ++i)
@@ -40,8 +40,8 @@ export default class IsoZone extends EdgeZone {
      */
     _project(point) {
         const isoPosition = new Point3(point.x, point.y, this.z)
-        const pluginKey = this.emitter.manager.scene.sys.settings.map.isoPlugin;
-        const sceneProjector = this.emitter.manager.scene[pluginKey].projector;
+        const pluginKey = this.scene.sys.settings.map.isoPlugin;
+        const sceneProjector = this.scene[pluginKey].projector;
         const { x, y } = sceneProjector.project(isoPosition);
 
         point.x = x
