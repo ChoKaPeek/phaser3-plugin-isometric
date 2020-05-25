@@ -125,9 +125,9 @@ export default class IsoParticleEmitter extends ParticleEmitter {
         // Update manager's depth dynamically if wanted
         if (this.dynamicDepth) {
             if (this._dynamicParticlesDepth() >= this.manager.originDepth) {
-                this.manager.depth = this.manager.originDepth - this.dynamicOffset
-            } else {
                 this.manager.depth = this.manager.originDepth + this.dynamicOffset
+            } else {
+                this.manager.depth = this.manager.originDepth - this.dynamicOffset
             }
         }
     }
