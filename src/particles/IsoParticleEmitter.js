@@ -39,7 +39,7 @@ export default class IsoParticleEmitter extends ParticleEmitter {
         // Do we need to dynamically update the depth of the associated manager?
         if (HasValue(config, 'dynamicDepth')) {
             this.dynamicDepth = !!config.dynamicDepth
-            this.dynamicOffset = GetFastValue(config.dynamicDepth, 'offset', 0.1);
+            this.dynamicBound = GetFastValue(config.dynamicDepth, 'bound', 0); // abs, 0 means no bound
             this.dynamicType = GetFastValue(config.dynamicDepth, 'type', 'mean');
         }
 
@@ -124,11 +124,15 @@ export default class IsoParticleEmitter extends ParticleEmitter {
 
         // Update manager's depth dynamically if wanted
         if (this.dynamicDepth) {
-            if (this._dynamicParticlesDepth() >= this.manager.originDepth) {
-                this.manager.depth = this.manager.originDepth + this.dynamicOffset
-            } else {
-                this.manager.depth = this.manager.originDepth - this.dynamicOffset
+            let depth = this._dynamicParticlesDepth()
+            if (this.dynamicBound) {
+                if (depth >= this.manager.originDepth) {
+                    depth = Math.min(this.manager.originDepth + this.dynamicBound, depth)
+                } else {
+                    depth = Math.max(this.manager.originDepth - this.dynamicBound, depth)
+                }
             }
+            this.manager.depth = depth
         }
     }
 }
