@@ -37,8 +37,11 @@ export default class IsoParticleEmitter extends ParticleEmitter {
         this.type = ISOPARTICLEEMITTER;
 
         // Do we need to dynamically update the depth of the associated manager?
-        this.dynamicDepth = GetFastValue(config, 'dynamicDepth', false);
-        this.dynamicOffset = GetFastValue(config, 'dynamicOffset', 0.1);
+        if (HasValue(config, 'dynamicDepth')) {
+            this.dynamicDepth = !!config.dynamicDepth
+            this.dynamicOffset = GetFastValue(config.dynamicDepth, 'offset', 0.1);
+            this.dynamicType = GetFastValue(config.dynamicDepth, 'type', 'mean');
+        }
 
         // Add an IsoZone
         this._setIsoEmitZone(emitZone)
@@ -70,14 +73,32 @@ export default class IsoParticleEmitter extends ParticleEmitter {
         this.emitZone = new IsoZone(this.manager.scene, z, source, quantity, stepRate, yoyo, seamless);
     }
 
-    _meanParticlesDepth() {
-        let mean = 0
-        for (let i = 0; i < this.alive.length; ++i) {
-            mean += this.alive[i].depth
+    _dynamicParticlesDepth() {
+        if (!this.alive.length) {
+            return this.manager.originDepth
         }
-        mean /= this.alive.length
 
-        return mean
+        switch (this.dynamicType) {
+            case 'mean':
+                let mean = 0
+                for (let i = 0; i < this.alive.length; ++i) {
+                    mean += this.alive[i].depth
+                }
+                mean /= this.alive.length
+
+                return mean
+
+            case 'first':
+                return this.alive[0].depth
+
+            case 'last':
+                return this.alive[this.alive.length - 1].depth
+
+            default:
+                console.error("Iso: unrecognized dynamicDepth type")
+                return this.manager.originDepth
+        }
+
     }
 
     /**
@@ -103,7 +124,7 @@ export default class IsoParticleEmitter extends ParticleEmitter {
 
         // Update manager's depth dynamically if wanted
         if (this.dynamicDepth) {
-            if (this._meanParticlesDepth() >= this.manager.originDepth) {
+            if (this._dynamicParticlesDepth() >= this.manager.originDepth) {
                 this.manager.depth = this.manager.originDepth - this.dynamicOffset
             } else {
                 this.manager.depth = this.manager.originDepth + this.dynamicOffset
