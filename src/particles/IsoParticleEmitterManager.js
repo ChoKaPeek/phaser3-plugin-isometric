@@ -36,6 +36,9 @@ export default class IsoParticleEmitterManager extends ParticleEmitterManager {
         } else {
             this.depth = isoPosition.x + isoPosition.y + isoPosition.z * 1.25
         }
+
+        // If depth is dynamic, keep origin depth available
+        this.originDepth = this.depth
     }
 
     /**
