@@ -12,11 +12,18 @@
 export default class Point3 {
   /**
    * @constructor
-   * @param {number} [x=0] - The horizontal X position of this Point.
+   * @param {number|Point3} [x=0] - The horizontal X position of this Point, or a Point3 to be copied.
    * @param {number} [y=0] - The horizontal Y position of this Point.
    * @param {number} [z=0] - The vertical position of this Point.
    */
   constructor(x = 0, y = 0, z = 0) {
+    // copy constructor
+    if (x instanceof Point3) {
+      this.x = x.x
+      this.y = x.y
+      this.z = x.z
+    }
+
     /**
      * @property {number} x - The x value of the point.
      */
