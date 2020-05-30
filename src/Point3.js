@@ -12,7 +12,7 @@
 export default class Point3 {
   /**
    * @constructor
-   * @param {number} [x=0] - The horizontal X position of this Point.
+   * @param {number|Point3} [x=0] - The horizontal X position of this Point, or a Point3 to be copied.
    * @param {number} [y=0] - The horizontal Y position of this Point.
    * @param {number} [z=0] - The vertical position of this Point.
    */
@@ -31,6 +31,13 @@ export default class Point3 {
      * @property {number} z - The z value of the point.
      */
     this.z = z;
+
+    // copy constructor
+    if (typeof x === 'object' && x !== null) {
+      this.x = x.x
+      this.y = x.y
+      this.z = x.z
+    }
   }
 
   /**
