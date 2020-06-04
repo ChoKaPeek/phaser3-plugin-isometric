@@ -37,6 +37,7 @@ export default class IsoParticleEmitterManager extends ParticleEmitterManager {
          * @private
          */
         this._isoPosition = new Point3(isoPosition)
+        console.log(this._isoPosition)
 
         /**
          * @property {boolean} _isoPositionChanged - Whether the position changed since the last update.
