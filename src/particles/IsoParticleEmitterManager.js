@@ -1,4 +1,5 @@
 import IsoParticleEmitter from "./IsoParticleEmitter";
+import Point3 from "../Point3";
 
 export const ISOPARTICLEEMITTERMANAGER = 'IsoParticleEmitterManager';
 
@@ -17,7 +18,7 @@ export default class IsoParticleEmitterManager extends ParticleEmitterManager {
      * @constructor
      * @extends Phaser.GameObjects.Particles.ParticleEmitterManager
      * @param {Phaser.Scene} scene - A reference to the current scene.
-     * @param {Point3|number} isoPosition - Necessary to compute the depth of the GameObject. If a number is given instead, it is the depth.
+     * @param {Point3} isoPosition - Anchor, necessary to compute the depth of the GameObject.
      * @param {string} texture - The key of the Texture this Emitter Manager will use to render particles, as stored in the Texture Manager.
      * @param {(string|integer)} [frame] - An optional frame from the Texture this Emitter Manager will use to render particles.
      * @param {Phaser.Types.GameObjects.Particles.ParticleEmitterConfig|Phaser.Types.GameObjects.Particles.ParticleEmitterConfig[]} [emitters] - Configuration settings for one or more emitters to create.
@@ -31,14 +32,66 @@ export default class IsoParticleEmitterManager extends ParticleEmitterManager {
          */
         this.type = ISOPARTICLEEMITTERMANAGER;
 
-        if (typeof isoPosition === 'number') {
-            this.depth = isoPosition
-        } else {
-            this.depth = isoPosition.x + isoPosition.y + isoPosition.z * 1.25
-        }
+        /**
+         * @property {Point3} _isoPosition - Internal 3D position.
+         * @private
+         */
+        this._isoPosition = new Point3(isoPosition)
 
-        // If depth is dynamic, keep origin depth available
-        this.originDepth = this.depth
+        /**
+         * @property {boolean} _isoPositionChanged - Whether the position changed since the last update.
+         * @private
+         */
+        this._isoPositionChanged = false
+
+        this.depth = this._isoPosition.x + this._isoPosition.y + (this._isoPosition.z * 1.25);
+        this.originDepth = this.depth // If depth is dynamic, keep origin depth available
+    }
+
+    get isoX() {
+        return this._isoPosition.x;
+    }
+
+    set isoX(value) {
+        this._isoPosition.x = value;
+        this._isoPositionChanged = true;
+    }
+
+    get isoY() {
+        return this._isoPosition.y;
+    }
+
+    set isoY(value) {
+        this._isoPosition.y = value;
+        this._isoPositionChanged = true;
+    }
+
+    get isoZ() {
+        return this._isoPosition.z;
+    }
+
+    set isoZ(value) {
+        this._isoPosition.z = value;
+        this._isoPositionChanged = true;
+    }
+
+    get isoPosition() {
+        return this._isoPosition;
+    }
+
+    _project() {
+        if (this._isoPositionChanged) {
+            const pluginKey = this.scene.sys.settings.map.isoPlugin;
+            const sceneProjector = this.scene[pluginKey].projector;
+            const { x, y } = sceneProjector.project(this._isoPosition);
+
+            this.x = x;
+            this.y = y;
+            this.depth = this._isoPosition.x + this._isoPosition.y + (this._isoPosition.z * 1.25);
+            this.originDepth = this.depth;
+
+            this._isoPositionChanged = true;
+        }
     }
 
     /**
@@ -70,5 +123,7 @@ export default class IsoParticleEmitterManager extends ParticleEmitterManager {
      */
     preUpdate(time, delta) {
         ParticleEmitterManager.prototype.preUpdate.call(this, time, delta);
+
+        this._project();
     }
 }
