@@ -43,10 +43,9 @@ export default class IsoParticleEmitterManager extends ParticleEmitterManager {
          * @property {boolean} _isoPositionChanged - Whether the position changed since the last update.
          * @private
          */
-        this._isoPositionChanged = false
+        this._isoPositionChanged = true
 
-        this.depth = this._isoPosition.x + this._isoPosition.y + (this._isoPosition.z * 1.25);
-        this.originDepth = this.depth // If depth is dynamic, keep origin depth available
+        this._project()
     }
 
     get isoX() {
@@ -89,7 +88,7 @@ export default class IsoParticleEmitterManager extends ParticleEmitterManager {
             this.x = x;
             this.y = y;
             this.depth = this._isoPosition.x + this._isoPosition.y + (this._isoPosition.z * 1.25);
-            this.originDepth = this.depth;
+            this.originDepth = this.depth; // If depth is dynamic, keep origin depth available
 
             this._isoPositionChanged = true;
         }
